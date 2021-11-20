@@ -1,0 +1,27 @@
+<form class="form">
+  <p class="mat-card-title">Регистрация:</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Логин</mat-label>
+    <input matInput name="login" id="login" [(ngModel)]="registerRequest.login">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Пароль</mat-label>
+    <input matInput name="password" id="password" [(ngModel)]="registerRequest.password">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Выберите роль</mat-label>
+    <mat-select name="role" [(ngModel)]="registerRequest.role">
+      <mat-option value="ROLE_STUDENT">Ученик</mat-option>
+      <mat-option value="ROLE_TEACHER">Учитель</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Имя</mat-label>
+    <input matInput name="firstName" id="firstName" [(ngModel)]="registerRequest.firstName">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Фамилия</mat-label>
+    <input matInput name="surname" id="surname" [(ngModel)]="registerRequest.surname">
+  </mat-form-field>
+  <button (click)="submit()" mat-stroked-button>Зарегестрироваться</button>
+</form>

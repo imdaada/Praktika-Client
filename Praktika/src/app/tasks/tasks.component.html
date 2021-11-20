@@ -1,0 +1,68 @@
+<div *ngIf="role === 'ROLE_TEACHER'">
+  <form class="form">
+    <p class="mat-card-title">Создать задание:</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Логин ученика</mat-label>
+      <input matInput name="login" id="login" [(ngModel)]="newTask.studentLogin.login" (change)="findLogin()">
+    </mat-form-field>
+    <mat-list>
+      <mat-list-item (click)="insertLogin(user.login)" *ngFor="let user of users">{{user.login}}</mat-list-item>
+    </mat-list>
+    <mat-form-field appearance="fill">
+      <mat-label>Текст задания</mat-label>
+      <textarea matInput name="text" id="text" [(ngModel)]="newTask.textOfTask"></textarea>
+    </mat-form-field>
+    <button (click)="submit()" mat-stroked-button>Создать</button>
+  </form>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle *ngFor="let task of tasks">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Номер задания {{task.id}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{task.textOfTask}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>Текст задания: {{task.textOfTask}}</p>
+      <p>Кем выдано: {{task.teacherLogin.login}}</p>
+      <p>Кому выдано: {{task.studentLogin.login}}</p>
+      <p>Приято: {{task.taken}}</p>
+      <p>Ответ: {{task.answerOnTask}}</p>
+      <p>Отзыв: {{task.feedback}}</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Отзыв:</mat-label>
+        <textarea matInput [name]="task.id + 'd'" [(ngModel)]="task.feedback"></textarea>
+      </mat-form-field>
+      <button (click)="change(task)" mat-stroked-button>Изменить отзыв</button>
+      <p><button (click)="deleteTask(task)" mat-stroked-button color="warn">Удалить задание</button></p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div *ngIf="role === 'ROLE_STUDENT'">
+  <mat-accordion>
+    <mat-expansion-panel hideToggle *ngFor="let task of tasks">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Номер задания {{task.id}}
+          <p *ngIf="!task.taken"> (Задание не начато!)</p>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{task.textOfTask}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>Текст задания: {{task.textOfTask}}</p>
+      <p>Кем выдано: {{task.teacherLogin.login}}</p>
+      <p>Кому выдано: {{task.studentLogin.login}}</p>
+      <p>Приято: {{task.taken}}</p>
+      <p>Ответ: {{task.answerOnTask}}</p>
+      <p>Отзыв: {{task.feedback}}</p>
+      <mat-slide-toggle [(ngModel)]="task.taken">Принять</mat-slide-toggle>
+      <mat-form-field *ngIf="task.taken" appearance="fill">
+        <mat-label>Ответ:</mat-label>
+        <textarea matInput [name]="task.id + 'd'" [(ngModel)]="task.answerOnTask"></textarea>
+      </mat-form-field>
+      <button (click)="change(task)" mat-stroked-button>Отправить</button>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

@@ -1,0 +1,15 @@
+<p>
+  <mat-toolbar>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button routerLink="/login" mat-menu-item>Войти</button>
+      <button routerLink="/register" mat-menu-item>Зарегистрироваться</button>
+      <button routerLink="" mat-menu-item>Задания</button>
+    </mat-menu>
+    <span>Ваше рабочее пространство</span>
+  </mat-toolbar>
+</p>
+
+<router-outlet></router-outlet>
