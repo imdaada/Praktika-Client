@@ -9,7 +9,7 @@ import {RegisterRequest} from './register/register-request';
 })
 export class UserService {
   constructor(private httpClient: HttpClient) { }
-  url = 'http://localhost:8080/';
+  url = 'https://afternoon-oasis-35400.herokuapp.com/';
   public login(loginReqest: LoginReqest): Observable<any>{
     return this.httpClient.post(this.url + 'authenticate', loginReqest);
   }

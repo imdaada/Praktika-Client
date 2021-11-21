@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 export class TaskService {
 
   constructor(private httpClient: HttpClient) { }
-  url = 'http://localhost:8080/';
+  url = 'https://afternoon-oasis-35400.herokuapp.com/';
   public addTask(task: Task): Observable<any> {
     return this.httpClient.post(this.url + 'task/addTask', task);
   }

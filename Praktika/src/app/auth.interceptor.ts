@@ -16,8 +16,8 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private cookieService: CookieService, private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (request.url !== 'http://localhost:8080/authenticate') {
-      if (request.url !== 'http://localhost:8080/register') {
+    if (request.url !== 'https://afternoon-oasis-35400.herokuapp.com/authenticate') {
+      if (request.url !== 'https://afternoon-oasis-35400.herokuapp.com/register') {
         const newReqest = request.clone({headers: request.headers.set('Authorization', this.cookieService.get('token'))});
         console.log(newReqest);
         return next.handle(newReqest).pipe(tap(
